@@ -84,25 +84,22 @@ const Upload = ({ onImageUpload, uploadedImage }) => {
     <div className="w-full max-w-2xl mx-auto">
       {/* Upload Card */}
       <div 
-        className={`relative bg-white/10 backdrop-blur-lg rounded-3xl p-8 border-2 border-dashed transition-all duration-300 
+        className={`relative bg-white rounded-2xl p-8 border-2 border-dashed transition-all duration-200 
                    ${isDragOver 
-                     ? 'border-cyan-400 bg-cyan-400/20 scale-105' 
-                     : 'border-white/30 hover:border-cyan-400/50 hover:bg-white/15'
+                     ? 'border-blue-400 bg-blue-50' 
+                     : 'border-slate-300 hover:border-blue-400 hover:bg-slate-50'
                    }`}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
       >
-        {/* Background decorative elements */}
-        <div className="absolute inset-0 -z-10 overflow-hidden rounded-3xl">
-          <div className="absolute top-4 right-4 animate-float">
-            <span className="text-3xl">🧠</span>
+        {/* Subtle background elements */}
+        <div className="absolute inset-0 -z-10 overflow-hidden rounded-2xl opacity-10">
+          <div className="absolute top-4 right-4">
+            <span className="text-2xl">🧠</span>
           </div>
-          <div className="absolute bottom-4 left-4 animate-pulse-slow">
-            <span className="text-2xl">💉</span>
-          </div>
-          <div className="absolute top-1/2 right-8 animate-bounce-slow">
-            <span className="text-xl">🔬</span>
+          <div className="absolute bottom-4 left-4">
+            <span className="text-xl">💉</span>
           </div>
         </div>
 
@@ -112,26 +109,25 @@ const Upload = ({ onImageUpload, uploadedImage }) => {
               <BrainScanIcon />
             </div>
             
-            <h3 className="text-2xl font-bold text-white mb-4">
+            <h3 className="text-2xl font-semibold text-slate-800 mb-4">
               Upload MRI Scan
             </h3>
             
-            <p className="text-white/80 mb-8 text-lg">
+            <p className="text-slate-600 mb-8 text-lg">
               Drag & drop your MRI image here, or click to browse
             </p>
             
             <button
               onClick={handleClick}
-              className="group relative inline-flex items-center space-x-3 bg-gradient-to-r from-blue-500 to-purple-600 
-                       text-white font-semibold px-8 py-4 rounded-full shadow-xl 
-                       transform transition-all duration-300 hover:scale-105 hover:shadow-blue-500/25
-                       focus:outline-none focus:ring-4 focus:ring-blue-300"
+              className="inline-flex items-center space-x-3 bg-blue-600 hover:bg-blue-700 
+                       text-white font-medium px-8 py-3 rounded-lg shadow-sm 
+                       transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-300"
             >
               <UploadIcon />
               <span>Choose File</span>
             </button>
             
-            <div className="mt-6 flex flex-wrap justify-center gap-4 text-sm text-white/70">
+            <div className="mt-6 flex flex-wrap justify-center gap-4 text-sm text-slate-500">
               <div className="flex items-center space-x-2">
                 <span>📁</span>
                 <span>JPG, PNG, DICOM</span>
@@ -148,7 +144,7 @@ const Upload = ({ onImageUpload, uploadedImage }) => {
               <ImageIcon />
             </div>
             
-            <h3 className="text-2xl font-bold text-white mb-4">
+            <h3 className="text-2xl font-semibold text-slate-800 mb-4">
               Image Preview
             </h3>
             
@@ -156,13 +152,12 @@ const Upload = ({ onImageUpload, uploadedImage }) => {
               <img
                 src={preview}
                 alt="MRI Preview"
-                className="w-full max-w-md mx-auto rounded-2xl shadow-2xl border-4 border-white/20"
+                className="w-full max-w-md mx-auto rounded-xl shadow-lg border border-slate-200"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-2xl"></div>
               <div className="absolute bottom-4 left-4 right-4">
-                <div className="flex items-center justify-between text-white">
+                <div className="flex items-center justify-between text-white bg-black/50 rounded-lg px-3 py-2">
                   <span className="text-sm font-medium">MRI Scan Ready</span>
-                  <span className="text-2xl">🧬</span>
+                  <span className="text-lg">🧬</span>
                 </div>
               </div>
             </div>
@@ -170,17 +165,17 @@ const Upload = ({ onImageUpload, uploadedImage }) => {
             <div className="flex space-x-4 justify-center">
               <button
                 onClick={handleClick}
-                className="px-6 py-3 bg-gradient-to-r from-green-500 to-teal-600 text-white font-semibold 
-                         rounded-full shadow-lg transform transition-all duration-300 hover:scale-105
-                         focus:outline-none focus:ring-4 focus:ring-green-300"
+                className="px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-medium 
+                         rounded-lg shadow-sm transition-colors duration-200
+                         focus:outline-none focus:ring-2 focus:ring-green-300"
               >
                 Change Image
               </button>
               <button
                 onClick={removeImage}
-                className="px-6 py-3 bg-gradient-to-r from-red-500 to-pink-600 text-white font-semibold 
-                         rounded-full shadow-lg transform transition-all duration-300 hover:scale-105
-                         focus:outline-none focus:ring-4 focus:ring-red-300"
+                className="px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-medium 
+                         rounded-lg shadow-sm transition-colors duration-200
+                         focus:outline-none focus:ring-2 focus:ring-red-300"
               >
                 Remove
               </button>
@@ -199,9 +194,9 @@ const Upload = ({ onImageUpload, uploadedImage }) => {
 
       {/* Status indicator */}
       <div className="mt-6 text-center">
-        <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2">
-          <div className={`w-3 h-3 rounded-full ${preview ? 'bg-green-400 animate-pulse' : 'bg-gray-400'}`}></div>
-          <span className="text-white/80 text-sm font-medium">
+        <div className="inline-flex items-center space-x-2 bg-slate-100 rounded-lg px-4 py-2">
+          <div className={`w-3 h-3 rounded-full ${preview ? 'bg-green-500' : 'bg-slate-400'}`}></div>
+          <span className="text-slate-600 text-sm font-medium">
             {preview ? 'Image uploaded successfully' : 'No image selected'}
           </span>
         </div>

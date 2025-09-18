@@ -34,7 +34,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
       <div className="container mx-auto px-4 py-8">
         <Header />
         
@@ -49,11 +49,11 @@ function App() {
               <button
                 onClick={handleDetection}
                 disabled={!uploadedImage || isProcessing}
-                className="group relative px-8 py-4 bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 
-                         text-white font-bold text-lg rounded-full shadow-2xl 
-                         transform transition-all duration-300 hover:scale-105 hover:shadow-pink-500/25
-                         disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none
-                         focus:outline-none focus:ring-4 focus:ring-pink-300"
+                className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-700 
+                         text-white font-semibold text-lg rounded-xl shadow-lg 
+                         transition-all duration-200 hover:shadow-xl hover:from-blue-700 hover:to-indigo-800
+                         disabled:opacity-50 disabled:cursor-not-allowed
+                         focus:outline-none focus:ring-2 focus:ring-blue-300"
               >
                 <span className="relative z-10 flex items-center space-x-2">
                   {isProcessing ? (
@@ -68,8 +68,6 @@ function App() {
                     </>
                   )}
                 </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-pink-600 via-red-600 to-yellow-600 
-                              rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </button>
             </div>
           </div>

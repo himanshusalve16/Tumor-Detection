@@ -105,49 +105,49 @@ const Result = ({ status, isProcessing, uploadedImage, onReset }) => {
         return {
           title: 'Ready for Analysis',
           description: 'Upload an MRI scan to begin tumor detection analysis.',
-          color: 'text-gray-400',
-          bgColor: 'bg-gray-500/10',
-          borderColor: 'border-gray-500/30'
+          color: 'text-slate-500',
+          bgColor: 'bg-slate-50',
+          borderColor: 'border-slate-200'
         };
       case 'Image Uploaded':
         return {
           title: 'Image Ready',
           description: 'Your MRI scan has been uploaded successfully. Click "Detect Tumor" to start analysis.',
-          color: 'text-blue-400',
-          bgColor: 'bg-blue-500/10',
-          borderColor: 'border-blue-500/30'
+          color: 'text-blue-600',
+          bgColor: 'bg-blue-50',
+          borderColor: 'border-blue-200'
         };
       case 'Processing...':
         return {
           title: 'Analyzing MRI Scan',
           description: 'Our AI is processing your brain MRI scan. This may take a few moments...',
-          color: 'text-cyan-400',
-          bgColor: 'bg-cyan-500/10',
-          borderColor: 'border-cyan-500/30'
+          color: 'text-indigo-600',
+          bgColor: 'bg-indigo-50',
+          borderColor: 'border-indigo-200'
         };
       case 'Tumor Detected':
         return {
           title: 'Tumor Detected',
           description: 'Our AI has identified potential tumor activity in the MRI scan. Please consult with a medical professional immediately.',
-          color: 'text-red-400',
-          bgColor: 'bg-red-500/10',
-          borderColor: 'border-red-500/30'
+          color: 'text-red-600',
+          bgColor: 'bg-red-50',
+          borderColor: 'border-red-200'
         };
       case 'No Tumor Detected':
         return {
           title: 'No Tumor Detected',
           description: 'Great news! Our AI analysis shows no signs of tumor activity in your MRI scan.',
-          color: 'text-green-400',
-          bgColor: 'bg-green-500/10',
-          borderColor: 'border-green-500/30'
+          color: 'text-green-600',
+          bgColor: 'bg-green-50',
+          borderColor: 'border-green-200'
         };
       default:
         return {
           title: 'Unknown Status',
           description: 'An unexpected error occurred. Please try again.',
-          color: 'text-gray-400',
-          bgColor: 'bg-gray-500/10',
-          borderColor: 'border-gray-500/30'
+          color: 'text-slate-500',
+          bgColor: 'bg-slate-50',
+          borderColor: 'border-slate-200'
         };
     }
   };
@@ -156,19 +156,16 @@ const Result = ({ status, isProcessing, uploadedImage, onReset }) => {
 
   return (
     <div className="w-full max-w-lg mx-auto">
-      <div className={`relative bg-white/10 backdrop-blur-lg rounded-3xl p-8 border-2 ${statusInfo.borderColor} 
-                      transition-all duration-500 hover:scale-105 hover:shadow-2xl`}>
+      <div className={`relative bg-white rounded-2xl p-8 border-2 ${statusInfo.borderColor} 
+                      transition-all duration-200 hover:shadow-lg`}>
         
-        {/* Background decorative elements */}
-        <div className="absolute inset-0 -z-10 overflow-hidden rounded-3xl">
-          <div className="absolute top-4 left-4 animate-float">
-            <span className="text-2xl">🔬</span>
+        {/* Subtle background elements */}
+        <div className="absolute inset-0 -z-10 overflow-hidden rounded-2xl opacity-10">
+          <div className="absolute top-4 left-4">
+            <span className="text-xl">🔬</span>
           </div>
-          <div className="absolute bottom-4 right-4 animate-pulse-slow">
-            <span className="text-2xl">💊</span>
-          </div>
-          <div className="absolute top-1/2 left-2 animate-bounce-slow">
-            <span className="text-xl">🧬</span>
+          <div className="absolute bottom-4 right-4">
+            <span className="text-xl">💊</span>
           </div>
         </div>
 
@@ -184,34 +181,34 @@ const Result = ({ status, isProcessing, uploadedImage, onReset }) => {
 
         {/* Status Content */}
         <div className="text-center">
-          <h3 className={`text-2xl font-bold mb-4 ${statusInfo.color}`}>
+          <h3 className={`text-2xl font-semibold mb-4 ${statusInfo.color}`}>
             {statusInfo.title}
           </h3>
           
-          <p className="text-white/80 text-lg leading-relaxed mb-6">
+          <p className="text-slate-600 text-lg leading-relaxed mb-6">
             {statusInfo.description}
           </p>
 
           {/* Additional info based on status */}
           {status === 'Tumor Detected' && (
-            <div className="bg-red-500/20 border border-red-500/30 rounded-2xl p-4 mb-6">
-              <div className="flex items-center justify-center space-x-2 text-red-300 mb-2">
-                <span className="text-xl">⚠️</span>
+            <div className="bg-red-50 border border-red-200 rounded-xl p-4 mb-6">
+              <div className="flex items-center justify-center space-x-2 text-red-700 mb-2">
+                <span className="text-lg">⚠️</span>
                 <span className="font-semibold">Important Notice</span>
               </div>
-              <p className="text-red-200 text-sm">
+              <p className="text-red-600 text-sm">
                 This is a demonstration tool. Always consult with qualified medical professionals for accurate diagnosis.
               </p>
             </div>
           )}
 
           {status === 'No Tumor Detected' && (
-            <div className="bg-green-500/20 border border-green-500/30 rounded-2xl p-4 mb-6">
-              <div className="flex items-center justify-center space-x-2 text-green-300 mb-2">
-                <span className="text-xl">🎉</span>
+            <div className="bg-green-50 border border-green-200 rounded-xl p-4 mb-6">
+              <div className="flex items-center justify-center space-x-2 text-green-700 mb-2">
+                <span className="text-lg">✅</span>
                 <span className="font-semibold">Healthy Scan</span>
               </div>
-              <p className="text-green-200 text-sm">
+              <p className="text-green-600 text-sm">
                 Continue regular health checkups and consult your doctor for any concerns.
               </p>
             </div>
@@ -222,9 +219,9 @@ const Result = ({ status, isProcessing, uploadedImage, onReset }) => {
             <div className="flex space-x-4 justify-center">
               <button
                 onClick={onReset}
-                className="px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-600 text-white font-semibold 
-                         rounded-full shadow-lg transform transition-all duration-300 hover:scale-105
-                         focus:outline-none focus:ring-4 focus:ring-purple-300"
+                className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium 
+                         rounded-lg shadow-sm transition-colors duration-200
+                         focus:outline-none focus:ring-2 focus:ring-indigo-300"
               >
                 Analyze Another Scan
               </button>
@@ -234,11 +231,11 @@ const Result = ({ status, isProcessing, uploadedImage, onReset }) => {
           {/* Processing progress bar */}
           {isProcessing && (
             <div className="mt-6">
-              <div className="w-full bg-white/20 rounded-full h-2 mb-2">
-                <div className="bg-gradient-to-r from-cyan-400 to-blue-500 h-2 rounded-full animate-pulse" 
+              <div className="w-full bg-slate-200 rounded-full h-2 mb-2">
+                <div className="bg-blue-500 h-2 rounded-full animate-pulse" 
                      style={{width: '60%'}}></div>
               </div>
-              <p className="text-cyan-300 text-sm">Processing scan data...</p>
+              <p className="text-slate-600 text-sm">Processing scan data...</p>
             </div>
           )}
         </div>
@@ -247,9 +244,9 @@ const Result = ({ status, isProcessing, uploadedImage, onReset }) => {
       {/* Confidence indicator for results */}
       {(status === 'Tumor Detected' || status === 'No Tumor Detected') && (
         <div className="mt-6 text-center">
-          <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2">
+          <div className="inline-flex items-center space-x-2 bg-slate-100 rounded-lg px-4 py-2">
             <span className="text-lg">🎯</span>
-            <span className="text-white/80 text-sm font-medium">
+            <span className="text-slate-600 text-sm font-medium">
               AI Confidence: {Math.floor(Math.random() * 20 + 80)}%
             </span>
           </div>

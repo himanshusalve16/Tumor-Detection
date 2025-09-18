@@ -30,22 +30,16 @@ const MRIIcon = () => (
 
 const Header = () => {
   return (
-    <header className="text-center relative overflow-hidden">
-      {/* Background decorative elements */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-10 left-10 animate-float">
+    <header className="text-center relative">
+      {/* Subtle background elements */}
+      <div className="absolute inset-0 -z-10 opacity-20">
+        <div className="absolute top-16 left-16">
           <BrainIcon />
         </div>
-        <div className="absolute top-20 right-20 animate-pulse-slow">
-          <NeuronIcon />
-        </div>
-        <div className="absolute bottom-10 left-1/4 animate-bounce-slow">
+        <div className="absolute top-20 right-20">
           <MRIIcon />
         </div>
-        <div className="absolute top-1/2 right-10 animate-float" style={{animationDelay: '2s'}}>
-          <BrainIcon />
-        </div>
-        <div className="absolute bottom-20 right-1/3 animate-pulse-slow" style={{animationDelay: '1s'}}>
+        <div className="absolute bottom-16 right-16">
           <NeuronIcon />
         </div>
       </div>
@@ -53,52 +47,31 @@ const Header = () => {
       {/* Main content */}
       <div className="relative z-10">
         <div className="inline-flex items-center space-x-4 mb-6">
-          <span className="text-6xl animate-bounce-slow">🧠</span>
-          <h1 className="text-5xl md:text-6xl font-black bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 
-                        bg-clip-text text-transparent drop-shadow-2xl">
+          <span className="text-5xl">🧠</span>
+          <h1 className="text-4xl md:text-5xl font-bold text-slate-800">
             Brain Tumor Detection
           </h1>
-          <span className="text-6xl animate-bounce-slow" style={{animationDelay: '0.5s'}}>🧬</span>
+          <span className="text-5xl">🧬</span>
         </div>
         
-        <div className="mb-4">
-          <span className="text-4xl animate-pulse-slow">💉</span>
-        </div>
-        
-        <h2 className="text-2xl md:text-3xl font-semibold text-white/90 mb-8 max-w-4xl mx-auto leading-relaxed">
-          Advanced AI-Powered MRI Analysis for Early Brain Tumor Detection
+        <h2 className="text-xl md:text-2xl font-medium text-slate-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+          AI-Powered MRI Analysis for Early Brain Tumor Detection
         </h2>
         
-        <div className="flex flex-wrap justify-center items-center gap-6 text-white/80 text-lg">
-          <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2">
-            <span className="text-2xl">🔬</span>
+        <div className="flex flex-wrap justify-center items-center gap-4 text-slate-600 text-sm">
+          <div className="flex items-center space-x-2 bg-white/80 backdrop-blur-sm rounded-lg px-4 py-2 shadow-sm">
+            <span className="text-lg">🔬</span>
             <span>Medical AI</span>
           </div>
-          <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2">
-            <span className="text-2xl">⚡</span>
+          <div className="flex items-center space-x-2 bg-white/80 backdrop-blur-sm rounded-lg px-4 py-2 shadow-sm">
+            <span className="text-lg">⚡</span>
             <span>Real-time Analysis</span>
           </div>
-          <div className="flex items-center space-x-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-2">
-            <span className="text-2xl">🎯</span>
+          <div className="flex items-center space-x-2 bg-white/80 backdrop-blur-sm rounded-lg px-4 py-2 shadow-sm">
+            <span className="text-lg">🎯</span>
             <span>High Accuracy</span>
           </div>
         </div>
-      </div>
-
-      {/* Floating particles effect */}
-      <div className="absolute inset-0 -z-10">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-2 h-2 bg-cyan-400/30 rounded-full animate-float"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 6}s`,
-              animationDuration: `${4 + Math.random() * 4}s`
-            }}
-          />
-        ))}
       </div>
     </header>
   );
