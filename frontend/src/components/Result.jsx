@@ -98,16 +98,18 @@ const BrainVisualization = ({ status }) => {
   );
 };
 
-const Result = ({ status, isProcessing, uploadedImage, onReset }) => {
+const Result = ({ status, isProcessing, uploadedImage, onReset, predictionResult, error, backendStatus }) => {
   const getStatusMessage = () => {
     switch (status) {
       case 'No Image Uploaded':
         return {
-          title: 'Ready for Analysis',
-          description: 'Upload an MRI scan to begin tumor detection analysis.',
-          color: 'text-slate-500',
-          bgColor: 'bg-slate-50',
-          borderColor: 'border-slate-200'
+          title: backendStatus === 'connected' ? 'Ready for Analysis' : 'Backend Not Connected',
+          description: backendStatus === 'connected' 
+            ? 'Upload an MRI scan to begin tumor detection analysis.'
+            : 'Please start the backend server to use the brain tumor detection feature.',
+          color: backendStatus === 'connected' ? 'text-slate-500' : 'text-red-500',
+          bgColor: backendStatus === 'connected' ? 'bg-slate-50' : 'bg-red-50',
+          borderColor: backendStatus === 'connected' ? 'border-slate-200' : 'border-red-200'
         };
       case 'Image Uploaded':
         return {
@@ -140,6 +142,14 @@ const Result = ({ status, isProcessing, uploadedImage, onReset }) => {
           color: 'text-green-600',
           bgColor: 'bg-green-50',
           borderColor: 'border-green-200'
+        };
+      case 'Analysis Failed':
+        return {
+          title: 'Analysis Failed',
+          description: error || 'An error occurred during analysis. Please try again.',
+          color: 'text-red-600',
+          bgColor: 'bg-red-50',
+          borderColor: 'border-red-200'
         };
       default:
         return {
@@ -242,14 +252,19 @@ const Result = ({ status, isProcessing, uploadedImage, onReset }) => {
       </div>
 
       {/* Confidence indicator for results */}
-      {(status === 'Tumor Detected' || status === 'No Tumor Detected') && (
+      {(status === 'Tumor Detected' || status === 'No Tumor Detected') && predictionResult && (
         <div className="mt-6 text-center">
           <div className="inline-flex items-center space-x-2 bg-slate-100 rounded-lg px-4 py-2">
             <span className="text-lg">🎯</span>
             <span className="text-slate-600 text-sm font-medium">
-              AI Confidence: {Math.floor(Math.random() * 20 + 80)}%
+              AI Confidence: {Math.round((predictionResult.confidence || 0) * 100)}%
             </span>
           </div>
+          {predictionResult.threshold && (
+            <div className="mt-2 text-xs text-slate-500">
+              Threshold: {predictionResult.threshold}
+            </div>
+          )}
         </div>
       )}
     </div>

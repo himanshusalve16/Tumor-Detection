@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backend Connection Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .status {
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        .connected { background-color: #d4edda; color: #155724; }
+        .disconnected { background-color: #f8d7da; color: #721c24; }
+        .checking { background-color: #fff3cd; color: #856404; }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover { background-color: #0056b3; }
+        .instructions {
+            background-color: #e7f3ff;
+            border: 1px solid #b3d9ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧠 Backend Connection Test</h1>
+        
+        <div id="status" class="status checking">Checking connection...</div>
+        
+        <button onclick="checkConnection()">Check Connection</button>
+        <button onclick="testPrediction()">Test Prediction</button>
+        
+        <div class="instructions">
+            <h3>Instructions:</h3>
+            <ol>
+                <li>Make sure the backend is running: <code>cd backend && python app.py</code></li>
+                <li>Click "Check Connection" to test the health endpoint</li>
+                <li>Click "Test Prediction" to test the prediction endpoint</li>
+            </ol>
+        </div>
+        
+        <div id="results"></div>
+    </div>
+
+    <script>
+        const API_BASE_URL = 'http://localhost:5000';
+        
+        async function checkConnection() {
+            const statusDiv = document.getElementById('status');
+            const resultsDiv = document.getElementById('results');
+            
+            try {
+                statusDiv.textContent = 'Checking connection...';
+                statusDiv.className = 'status checking';
+                
+                const response = await fetch(`${API_BASE_URL}/health`);
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    statusDiv.textContent = '✅ Backend Connected';
+                    statusDiv.className = 'status connected';
+                    resultsDiv.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+                } else {
+                    statusDiv.textContent = '❌ Backend Error';
+                    statusDiv.className = 'status disconnected';
+                    resultsDiv.innerHTML = `Error: ${response.status} ${response.statusText}`;
+                }
+            } catch (error) {
+                statusDiv.textContent = '❌ Backend Disconnected';
+                statusDiv.className = 'status disconnected';
+                resultsDiv.innerHTML = `Error: ${error.message}`;
+            }
+        }
+        
+        async function testPrediction() {
+            const resultsDiv = document.getElementById('results');
+            
+            try {
+                // Create a simple test image
+                const canvas = document.createElement('canvas');
+                canvas.width = 128;
+                canvas.height = 128;
+                const ctx = canvas.getContext('2d');
+                
+                // Create a simple pattern
+                for (let x = 0; x < 128; x++) {
+                    for (let y = 0; y < 128; y++) {
+                        const value = Math.random() * 255;
+                        ctx.fillStyle = `rgb(${value}, ${value}, ${value})`;
+                        ctx.fillRect(x, y, 1, 1);
+                    }
+                }
+                
+                // Convert to blob
+                const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+                
+                // Create FormData
+                const formData = new FormData();
+                formData.append('file', blob, 'test-image.png');
+                
+                resultsDiv.innerHTML = 'Testing prediction...';
+                
+                // Make prediction request
+                const response = await fetch(`${API_BASE_URL}/predict`, {
+                    method: 'POST',
+                    body: formData,
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`Prediction failed: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                resultsDiv.innerHTML = `
+                    <h3>Prediction Result:</h3>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+                
+            } catch (error) {
+                resultsDiv.innerHTML = `Prediction Error: ${error.message}`;
+            }
+        }
+        
+        // Check connection on page load
+        checkConnection();
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+{
+  "architecture": "CNN for Brain Tumor Detection",
+  "input_shape": [
+    128,
+    128,
+    1
+  ],
+  "total_parameters": 2787457,
+  "training_results": {
+    "accuracy": 0.5,
+    "precision": 0.0,
+    "recall": 0.0,
+    "loss": 0.6780993342399597,
+    "confusion_matrix": [
+      [
+        10,
+        0
+      ],
+      [
+        10,
+        0
+      ]
+    ]
+  },
+  "preprocessing": {
+    "resize": [
+      128,
+      128
+    ],
+    "grayscale": true,
+    "gaussian_blur": true,
+    "clahe": true,
+    "normalization": "0-1"
+  }
+}
